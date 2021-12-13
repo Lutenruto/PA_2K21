@@ -2,6 +2,7 @@ import React from 'react';
 import './CreateBid.css';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+require("dotenv").config();
 
 const MySwal = withReactContent(Swal)
 
@@ -51,7 +52,7 @@ class CreateBid extends React.Component{
 				"active": true
 			})
 		};
-		fetch('http://51.83.45.52:8080/bid', requestOptions)
+		fetch(process.env.REACT_APP_API_BASE + '/bid', requestOptions)
 			.then(response => response.json())
 			.then( (data) => { console.log(data) });
 	

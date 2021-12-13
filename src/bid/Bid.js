@@ -3,6 +3,7 @@ import './Bid.css';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { Default } from 'react-spinners-css';
+require("dotenv").config();
 
 
 const MySwal = withReactContent(Swal);
@@ -168,12 +169,11 @@ class Bid extends React.Component{
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: this.props.id })
             };
-            fetch("http://51.83.45.52:8080/bid/",requestOptions)
-            .then(res => res.json())
-            .then(
-            (result) => {
+            fetch(process.env.REACT_APP_API_BASE + "/bid", requestOptions)
+              .then((res) => res.json())
+              .then((result) => {
                 console.log(result);
-            })
+              });
 
             MySwal.fire({
                 title: "Succès",

@@ -2,6 +2,7 @@ import React from 'react';
 import './MyBids.css';
 import Bid from '../bid/Bid';
 import { Default } from 'react-spinners-css';
+require("dotenv").config();
 
 class MyBids extends React.Component{
 	constructor(props) {
@@ -13,17 +14,17 @@ class MyBids extends React.Component{
 	}
 
     getMyBids(){
-        fetch("http://51.83.45.52:8080/bid/" + this.props.appProps.account)
-        .then(res => res.json())
-        .then(
-          (result) => {
-              console.log(result);
-            this.setState({
-                bids: result,
-                requestEnded: true
-            });
-          }
-        )
+        fetch(process.env.REACT_APP_API_BASE + "/bid" + this.props.appProps.account)
+            .then(res => res.json())
+            .then(
+            (result) => {
+                console.log(result);
+                this.setState({
+                    bids: result,
+                    requestEnded: true
+                });
+            }
+            )
     }
 
     componentDidMount(){
